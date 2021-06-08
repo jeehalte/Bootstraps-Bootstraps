@@ -18,7 +18,6 @@ PACKAGES=(
   gnupg
   hadolint
   helm
-  homebrew/dupes/openssh
   ipython
   kubernetes-cli
   mas
@@ -47,12 +46,10 @@ CASKS=(
   atom
   dbeaver-community
   docker
-  firefox
   firefox-developer-edition
   google-chrome
   google-chrome-canary
   insomnia
-  intellij-idea-ce
   iterm2
   pycharm-ce
   rectangle
@@ -69,7 +66,7 @@ echo "Installing homebrew..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 echo "Installing homebrew goodies..."
-brew tap caskroom/cask
+brew tap homebrew/cask
 brew update
 brew install ${PACKAGES[@]}
 brew install vim --override-system-vi
@@ -110,25 +107,25 @@ ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/the
 
 # Make room for code
 echo "Making Code Folder..."
-mkdir -p ~/Code
+mkdir -p ~/Code/Preferences
 
 # Installing preferences 
 echo "Installing Preferences..."
 mv ~/.zshrc ~/.zshrc_backup
-cp zshrc ~/.zshrc
+#cp zshrc ~/.zshrc
 cp vimrc ~/.vimrc
 cp com.googlecode.iterm2.plist ~/Code/Preferences/com.googlecode.iterm2.plist
 
 # Install Powerline fonts
-echo "Installing Powerline Fonts..."
-# clone
-git clone https://github.com/powerline/fonts.git --depth=1
-# install
-cd fonts
-./install.sh
-# clean-up a bit
-cd ..
-rm -rf fonts
+# echo "Installing Powerline Fonts..."
+# # clone
+# git clone https://github.com/powerline/fonts.git --depth=1
+# # install
+# cd fonts
+# ./install.sh
+# # clean-up a bit
+# cd ..
+# rm -rf fonts
 
 # Virtual Python Environments
 echo "Installing Python Virtual Environments..."
@@ -137,8 +134,8 @@ pip3 install virtualenvwrapper
 
 echo "Setting some cool settings..."
 # Require password immediately after sleep or screen saver begins
-defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
+# defaults write com.apple.screensaver askForPassword -int 1
+# defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
@@ -147,16 +144,16 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 2
-defaults write NSGlobalDomain InitialKeyRepeat -int 15
+# defaults write NSGlobalDomain KeyRepeat -int 2
+# defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # Use column view in all Finder windows by default
 # Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`
-defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+# defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
 
 # Bottom left screen corner → Start screen saver
-defaults write com.apple.dock wvous-bl-corner -int 5
-defaults write com.apple.dock wvous-bl-modifier -int 0
+# defaults write com.apple.dock wvous-bl-corner -int 5
+# defaults write com.apple.dock wvous-bl-modifier -int 0
 
 # VS Code Extentions
 cat << EOF >> ~/.zshrc
